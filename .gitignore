@@ -1,0 +1,16 @@
+*.class
+
+# Package Files #
+*.jar
+
+.project
+.classpath
+data/
+.git/
+target/
+.settings
+
+*.log
+*.swp
+*.diff
+*.patch

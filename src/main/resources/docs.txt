@@ -1,0 +1,12 @@
+1\
+select id,container,msgid_prod,msgid_seq,expiration,msg,priority from activemq_msgs;
+
+2\
+select id,time,broker_name from activemq_lock;
+time字段30s更新
+
+
+两个broker实例都在运行中时，共用一个 mysql数据库是没有问题的。
+不过一个重启后，就会把msgs中的消息都load起来并消费掉了。
+
+
