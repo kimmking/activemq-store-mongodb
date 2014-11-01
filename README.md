@@ -3,6 +3,7 @@ ActiveMQ Store MongoDB project
 
 ### Introduce  
   This project for creating an ActiveMQ Store by MongoDB.
+  If you build all packages from sourcecode with the lastest versions, the xsd files will be auto-generated.
   
 ### Architecture
     1. modify activemq.xsd in activemq-core.jar, insert mongodb node after kahaDB node:
