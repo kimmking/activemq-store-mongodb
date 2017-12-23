@@ -314,6 +314,6 @@ vmQueueCursor = org.apache.activemq.broker.region.policy.VMPendingQueueMessageSt
 xaConnectionFactory = org.apache.activemq.spring.ActiveMQXAConnectionFactory
 xaConnectionFactory.initMethod = afterPropertiesSet
 
-mongodb = org.qsoft.activemq.store.mongodb.MongodbPersistenceAdapter
+mongodb = io.github.kimmking.activemq.store.mongodb.MongodbPersistenceAdapter
 
 

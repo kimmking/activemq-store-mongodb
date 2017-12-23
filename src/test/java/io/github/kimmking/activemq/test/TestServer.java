@@ -1,4 +1,4 @@
-package org.qsoft.activemq.test;
+package io.github.kimmking.activemq.test;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

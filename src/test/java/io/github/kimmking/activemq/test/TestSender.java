@@ -1,4 +1,4 @@
-package org.qsoft.activemq.test;
+package io.github.kimmking.activemq.test;
 
 import javax.jms.BytesMessage;
 import javax.jms.Queue;
@@ -34,7 +34,7 @@ public class TestSender {
 			QueueSession session = conn.createQueueSession(false, Session.AUTO_ACKNOWLEDGE);
 			QueueSender sender = session.createSender(queue);
 			long start = System.currentTimeMillis();
-			int count = 10000;
+			int count = 10;
 			int size = 1024;
 			for (int i = 0; i < count; i++) {
 				//String msgText = "testMessage-" + i;

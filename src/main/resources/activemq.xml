@@ -16,11 +16,11 @@
 -->
 <!-- START SNIPPET: example -->
 <beans
-  xmlns="http://www.springframework.org/schema/beans"
-  xmlns:amq="http://activemq.apache.org/schema/core"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
-  http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+
 
     <broker xmlns="http://activemq.apache.org/schema/core" 
     brokerName="kk" useJmx="true">
@@ -41,7 +41,7 @@
         </managementContext>
 
         <persistenceAdapter>
-            <mongodb host="127.0.0.1" port="27017" db="activemq" />
+            <mongodb host="192.168.20.4" port="28010" db="filedb" user="fileUser" password="123456"/>
         </persistenceAdapter>
         
         <systemUsage>

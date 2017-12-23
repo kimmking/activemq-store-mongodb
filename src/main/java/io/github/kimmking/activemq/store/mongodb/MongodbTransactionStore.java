@@ -1,4 +1,4 @@
-package org.qsoft.activemq.store.mongodb;
+package io.github.kimmking.activemq.store.mongodb;
 
 import java.io.IOException;
 

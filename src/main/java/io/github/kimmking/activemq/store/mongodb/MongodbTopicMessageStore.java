@@ -1,23 +1,20 @@
-package org.qsoft.activemq.store.mongodb;
+package io.github.kimmking.activemq.store.mongodb;
 
 import java.io.IOException;
-import java.util.concurrent.Future;
 
 import org.apache.activemq.broker.ConnectionContext;
 import org.apache.activemq.command.ActiveMQDestination;
-import org.apache.activemq.command.Message;
 import org.apache.activemq.command.MessageAck;
 import org.apache.activemq.command.MessageId;
 import org.apache.activemq.command.SubscriptionInfo;
 import org.apache.activemq.store.MessageRecoveryListener;
+import org.apache.activemq.store.MessageStoreSubscriptionStatistics;
 import org.apache.activemq.store.TopicMessageStore;
-import org.apache.activemq.usage.MemoryUsage;
 import org.apache.activemq.wireformat.WireFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MongodbTopicMessageStore extends MongodbMessageStore implements
-		TopicMessageStore {
+public class MongodbTopicMessageStore extends MongodbMessageStore implements TopicMessageStore {
 
 	private static final Logger LOG = LoggerFactory
 			.getLogger(MongodbTopicMessageStore.class);
@@ -69,6 +66,16 @@ public class MongodbTopicMessageStore extends MongodbMessageStore implements
 	}
 
 	@Override
+	public long getMessageSize(String s, String s1) throws IOException {
+		return 0;
+	}
+
+	@Override
+	public MessageStoreSubscriptionStatistics getMessageStoreSubStatistics() {
+		return null;
+	}
+
+	@Override
 	public SubscriptionInfo lookupSubscription(String clientId,
 			String subscriptionName) throws IOException {
 		LOG.debug("MongodbTopicMessageStore.lookupSubscription");
@@ -82,9 +89,10 @@ public class MongodbTopicMessageStore extends MongodbMessageStore implements
 	}
 
 	@Override
-	public void addSubsciption(SubscriptionInfo subscriptionInfo,
-			boolean retroactive) throws IOException {
+	public void addSubscription(SubscriptionInfo subscriptionInfo, boolean retroactive) throws IOException {
 		LOG.debug("MongodbTopicMessageStore.addSubsciption");
 	}
+
+
 
 }

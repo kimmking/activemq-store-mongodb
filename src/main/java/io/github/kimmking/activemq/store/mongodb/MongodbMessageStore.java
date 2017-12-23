@@ -1,4 +1,4 @@
-package org.qsoft.activemq.store.mongodb;
+package io.github.kimmking.activemq.store.mongodb;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,54 +30,54 @@ public class MongodbMessageStore extends AbstractMessageStore {
 
 	@Override
 	public void addMessage(ConnectionContext context, Message message) throws IOException {
-		if(LOG.isDebugEnabled())
-			LOG.debug("MongodbMessageStore.addMessage: " + message);
+		if(LOG.isInfoEnabled())
+			LOG.info("MongodbMessageStore.addMessage: " + message);
 		this.helper.addMessage(message);
 	}
 
 	@Override
 	public Message getMessage(MessageId identity) throws IOException {
-		if(LOG.isDebugEnabled())
-			LOG.debug("MongodbMessageStore.getMessage:{0}", identity);
+		if(LOG.isInfoEnabled())
+			LOG.info("MongodbMessageStore.getMessage:{0}", identity);
 		return this.helper.getMessage(identity);
 	}
 
 	@Override
 	public void removeMessage(ConnectionContext context, MessageAck ack) throws IOException {
-		if(LOG.isDebugEnabled())
-			LOG.debug("MongodbMessageStore.removeMessage: " + context + "," + ack);
+		if(LOG.isInfoEnabled())
+			LOG.info("MongodbMessageStore.removeMessage: " + context + "," + ack);
 		this.helper.removeMessage(this.getDestination(), ack);
 	}
 
 	@Override
 	public void removeAllMessages(ConnectionContext context) throws IOException {
-		if(LOG.isDebugEnabled())
-			LOG.debug("MongodbMessageStore.removeAllMessages");
+		if(LOG.isInfoEnabled())
+			LOG.info("MongodbMessageStore.removeAllMessages");
 		this.helper.removeAllMessages();
 	}
 
 	@Override
 	public void recover(MessageRecoveryListener container) throws Exception {
-		if(LOG.isDebugEnabled())
-			LOG.debug("MongodbMessageStore.recover: " + container);
+		if(LOG.isInfoEnabled())
+			LOG.info("MongodbMessageStore.recover: " + container);
 		// TODO ? what is this
 	}
 
 	@Override
 	public int getMessageCount() throws IOException {
-		LOG.debug("MongodbMessageStore.getMessageCount");
+		LOG.info("MongodbMessageStore.getMessageCount:"+this.helper.count());
 		return this.helper.count();
 	}
 
 	@Override
 	public void resetBatching() {
-		LOG.debug("MongodbMessageStore.resetBatching");
+		LOG.info("MongodbMessageStore.resetBatching");
 	}
 
 	@Override
 	public void recoverNextMessages(int maxReturned, MessageRecoveryListener listener) throws Exception {
-		if(LOG.isDebugEnabled())
-			LOG.debug("MongodbMessageStore.recoverNextMessages: " + maxReturned + " from " + lastRecoveredSequenceId.get());
+		if(LOG.isInfoEnabled())
+			LOG.info("MongodbMessageStore.recoverNextMessages: " + maxReturned + " from " + lastRecoveredSequenceId.get());
 		//long start = System.currentTimeMillis();
 		List<Message> msgs = this.helper.find(maxReturned, this.getDestination().getQualifiedName(), lastRecoveredSequenceId.get());
 		//long end1 = System.currentTimeMillis();
@@ -87,12 +87,12 @@ public class MongodbMessageStore extends AbstractMessageStore {
 				listener.recoverMessage(message);
 				lastRecoveredSequenceId.set(message.getMessageId().getBrokerSequenceId());
 			}
-			if(LOG.isDebugEnabled())
-				LOG.debug("MongodbMessageStore.recoverNextMessages: " + msgs.size() + " ~ " + this.getDestination().getQualifiedName());
+			if(LOG.isInfoEnabled())
+				LOG.info("MongodbMessageStore.recoverNextMessages: " + msgs.size() + " ~ " + this.getDestination().getQualifiedName());
 		}
 		else{
-			if(LOG.isDebugEnabled())
-				LOG.debug("MongodbMessageStore.recoverNextMessages: NONE ~ " + this.getDestination().getQualifiedName());
+			if(LOG.isInfoEnabled())
+				LOG.info("MongodbMessageStore.recoverNextMessages: NONE ~ " + this.getDestination().getQualifiedName());
 		}
 //		long end = System.currentTimeMillis();
 //		System.out.println((end1-start)+" " + (end-end1));

@@ -4547,6 +4547,20 @@ batch)
           ]]></xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
+			<xs:attribute name='user' type='xs:string'>
+				<xs:annotation>
+					<xs:documentation><![CDATA[
+            Get the user
+          ]]></xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name='password' type='xs:string'>
+				<xs:annotation>
+					<xs:documentation><![CDATA[
+            Get the password
+          ]]></xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
 

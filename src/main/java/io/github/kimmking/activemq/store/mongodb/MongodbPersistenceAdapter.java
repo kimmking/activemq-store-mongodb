@@ -1,4 +1,4 @@
-package org.qsoft.activemq.store.mongodb;
+package io.github.kimmking.activemq.store.mongodb;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.activemq.broker.BrokerService;
 import org.apache.activemq.broker.BrokerServiceAware;
 import org.apache.activemq.broker.ConnectionContext;
+import org.apache.activemq.broker.scheduler.JobSchedulerStore;
 import org.apache.activemq.command.ActiveMQDestination;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
@@ -37,6 +38,8 @@ public class MongodbPersistenceAdapter implements PersistenceAdapter, BrokerServ
 	private String host;
 	private int port;
 	private String db;
+	private String user;
+	private String password;
 
 	// private BrokerService brokerService;
 
@@ -64,9 +67,25 @@ public class MongodbPersistenceAdapter implements PersistenceAdapter, BrokerServ
 		this.db = db;
 	}
 
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Override
 	public void start() throws Exception {
-		helper = new MongoDBHelper(host, port, db, wireFormat);
+		helper = new MongoDBHelper(host, port, db, user, password, wireFormat);
 	}
 
 	@Override
@@ -111,6 +130,11 @@ public class MongodbPersistenceAdapter implements PersistenceAdapter, BrokerServ
 		MongodbTopicMessageStore store = new MongodbTopicMessageStore(destination, wireFormat, helper);
 		this.topicStores.put(destination, store);
 		return store;
+	}
+
+	@Override
+	public JobSchedulerStore createJobSchedulerStore() throws IOException, UnsupportedOperationException {
+		return null;
 	}
 
 	@Override
@@ -163,6 +187,11 @@ public class MongodbPersistenceAdapter implements PersistenceAdapter, BrokerServ
 	public long getLastProducerSequenceId(ProducerId id) throws IOException {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void allowIOResumption() {
+
 	}
 
 	public String toString() {

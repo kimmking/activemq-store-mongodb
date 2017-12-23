@@ -1,4 +1,4 @@
-package org.qsoft.activemq.test;
+package io.github.kimmking.activemq.test;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -24,8 +24,8 @@ public class TestReceiver {
 	 */
 	public static void main(String[] args) {
 		
-		int a = 1;
-		if(a== 1)
+		int a = 0;
+		if(a== 0)
 			listen();
 		else
 			receive();
@@ -85,12 +85,12 @@ public class TestReceiver {
 			// init connection factory with activemq
 			QueueConnectionFactory factory = new ActiveMQConnectionFactory("tcp://127.0.0.1:61616");
 			// specify the destination
-			Queue queue = new ActiveMQQueue("kk.mysql");
+			Queue queue = new ActiveMQQueue("kk.mongo");
 			// create connection,session,consumer and receive message
 			ActiveMQConnection conn = (ActiveMQConnection) factory.createQueueConnection();
-			conn.setOptimizeAcknowledge(true);
-			conn.setOptimizeAcknowledgeTimeOut(4000);
-			conn.setOptimizedAckScheduledAckInterval(2000);
+			//conn.setOptimizeAcknowledge(true);
+			//conn.setOptimizeAcknowledgeTimeOut(4000);
+			//conn.setOptimizedAckScheduledAckInterval(2000);
 			//conn.setSendAcksAsync(true);
 			conn.start();
 			final int count = 10000;
@@ -103,7 +103,7 @@ public class TestReceiver {
 			MessageListener listenerA1 = new MessageListener(){
 				public void onMessage(Message message) {
 					int a = a1.getAndIncrement();
-					if( a % 100 == 0)
+					if( a % 2 == 0)
 					{
 						times[1] = times[0];
 						times[0] = System.currentTimeMillis();
@@ -124,6 +124,7 @@ public class TestReceiver {
 //					}
 				}};
 			receiverA1.setMessageListener(listenerA1 );
+			sessionA1.run();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
